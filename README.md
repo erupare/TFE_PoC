@@ -27,17 +27,21 @@ https://www.terraform.io/docs/cloud/vcs/index.html
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
 
 Workflow
-<DIAGRAM HERE>
+![alt text](tferoles/TFERoles.png "Diagram showing TFE roles")
 
 2. Terraform code can be a living, evolving document. Usually it starts with all resources in the same file, and eventually as complexity grows, the team can identify areas that can be separated into independent files or in external modules.
-
 3. Terraform will look for all files with .tf extension in a folder, and create a dependency graph internally to help it decide in which sequence resources will be created. Beacuse of that, it doesnt matter if all resources are in a main.tf or in multiple files (main.tf, network.tf, security.tf, etc).
-
 4. Using modules is a best practice in enterprise because it allows code reuse and enforcing compliance and best practices.
-
 5. Workflows for the Private Module Registry and for Sentinel will have their own test cases.
 
-### Control de Permissos Terraform
+### Modules Best Practices
+1. Try to have module hierarchy as flat as possible, at most 3-layer depth to reduce complexity
+2. Use a composition pattern, where many smaller modules can be assembled as needed, reducing depedencies and increasing reuse
+3. Reference on composition and abstracting objects within modules: https://www.terraform.io/docs/modules/composition.html
+4. You can also automate the workspace creation by using the TFE workspace creator
+https://github.com/vincentramirez/creator (and financial institution reference)
+
+### Controlling Permissions in Terraform
 1. On the TFE browser, go to "Settings" and create three groups: "admin", "users" and "superusers". 
 2. Create three users, and assign each one to each of these groups
 3. Go to the workspace created in the previous example, go to "Settings"> "Permissions" and assign the following permissions: "admin" has admin rights, "users" can plan and "superusers" can apply
@@ -54,27 +58,28 @@ https://www.terraform.io/docs/enterprise/saml/identity-provider-configuration-ad
 3. Run a plan to validate changes
 
 #### *Terraform Enterprise Provider*
-TODO
 1. Do one example using Terraform Enterprise provider
 https://www.terraform.io/docs/providers/tfe/index.html
 Will need a user token, workspace id, tfe url, tfe certificate
+Test: [tfprovider.md](variablestesting/tfprovider.md)
 
 #### *Terraform Enterprise API*
-TODO
 1. Do one example using Terraform Enterprise API
 https://www.terraform.io/docs/cloud/api/variables.html
-ill need a user token, workspace id, tfe url, tfe certificate
+it will need a user token, workspace id, tfe url, tfe certificate
+Test: [api.md](variablestesting/api.md)
 
-### Integracion con Azure KeyVault y Vault
-TODO
-1. Ensure TErraform code using the two resources:
+### Integration with Azure KeyVault and Vault
+1. Ensure Terraform code using the two resources:
 #### Azure KeyVault
 https://www.terraform.io/docs/providers/azurerm/r/key_vault.html
 Needs Azure API keys
+Test: [azurekeyvault.tf](azurekeyvault/azurekeyvault.tf)
 
 #### Vault
 https://www.terraform.io/docs/providers/vault/index.html
 Needs Vault token with sufficient permissions
+Test: [vaultintegration](vaultintegration/vaultintegration.tf)
 
 2. Create workspace, update variables with API keys, run
 3. Log to Azure to validate
@@ -101,23 +106,32 @@ Needs Vault token with sufficient permissions
 1. Open the workspace history to validate history of runs
 
 ### Terraform API Calls
-TODO
-GO over this code: https://github.com/hashicorp/terraform-guides/tree/master/operations/automation-script
+Go over this code: https://github.com/hashicorp/terraform-guides/tree/master/operations/automation-script
+Flexible code:
+1. Can clone a git repo, or use files local to where the script is running (potentially Jenkins)
+2. Can trigger a plan sequence on existing workspace, or create new workspace if doesnt exist
+3. Can update Terraform environment variables if using variables.csv
+Straightforward process described here https://www.terraform.io/docs/cloud/run/api.html, just make sure you compress (tar.gz) and upload to TFE the terraform code you want the workspace to execute
+Python is only used in the example to parse json, jq could be used instead.
+Csv is just used for this particular script to extract variables, not TFE requirement
+
 
 ### Terraform Cost Management
-TODO
 1. Simple AWS code creating resources
 2. Ensure it is Terraform 0.12
+2. Create workspace and run plan
 3. Validate costs shown
-4. Talk about roadmap for Azure and GCP
+4. Change variable instance sie
+5. Validate new cost
+6. Talk about roadmap for Azure and GCP
+Test: [costmanagement](costmanagement/costmanagement.tf)
 
 ### Self Documenting Features
 1. Go over Terraform code and explain how it can be used to validate infrastructure
 2. Go over history of runs of each workspace to validate documentation
 
 ### Integration with Active Directory
-TODO - Review to present
-These docs describe the steps to configure integration with Active Directory, Okta and OneLogin:
+These docs describe the steps to configure integration with Active Directory and to map users within AD groups to TF groups:
 https://www.terraform.io/docs/enterprise/saml/identity-provider-configuration-adfs.html
 
 ### TF State Management
@@ -126,7 +140,6 @@ https://www.terraform.io/docs/enterprise/saml/identity-provider-configuration-ad
 3. Ensure that state files are encrypted
 
 ### Private Module Registry - Lifecycle
-TODO
 1. Ensure terraform code with module. Structure and naming scheme expected found here 
 https://www.terraform.io/docs/modules/index.html
 2. Create a new module, pointing to this code
@@ -134,6 +147,7 @@ https://www.terraform.io/docs/modules/index.html
 4. Ensure separate repository with reference to this module
 5. Create a workspace, run, validate worked corectly
 6. Update module and push, alongside a tag. Validate new version of module available, however it does not trigger a run on workspaces using that module, since they have independent lifecycles
+https://github.com/stenio123/terraform-aws-deploylambda
 
 ### Private Module Registry - Configuration Designer
 1. Click on Private Module Registry
@@ -144,6 +158,7 @@ https://www.terraform.io/docs/modules/index.html
 6. Ensure this repository is associated with workspace, trigger run
 
 ### Sentinel Workflow
+Use these as reference for tests https://github.com/stenio123/terraform-guides/tree/master/governance/second-generation/aws
 1. Ensure code with Sentinel rules
 2. Talk about the .sentinel file that specifies scope
 3. Create rule associated with this git repository
@@ -154,11 +169,10 @@ https://www.terraform.io/docs/modules/index.html
 8. Discuss how Sentinel policies can be enforced on a recurring basis by running a cron job that triggers plans hourly using API calls and having notications set up
 
 ### TFE Notifications
-TODO diagram
 1. Open workspace
 2. Go to "Settings"> "Notifications"
 3. Talk about the two different types of integration
-<diagram Service Now>
+![alt text](tfenotifications/servicenowTFE.png "Diagram showing TFE notification")
 https://medium.com/hashicorp-engineering/terraform-enterprise-and-friends-2620bdfd1951
 
 ### Terraform Workflow - Code lifecycle
@@ -171,12 +185,12 @@ https://medium.com/hashicorp-engineering/terraform-enterprise-and-friends-2620bd
 1. Do a change and push code to respository associated with Sentinel policy, validate changes
 
 ### Audit Logs
-TODO
 1. Log in to TFE server
-2. Open log XXX
+2. Run [audit.sh](logs/audit.sh)
 3. Validate information
 4. Discuss how to ship this log to a log management platform like Splunk, Datadog or logstash
-<diagram logs>
+![alt text](logs/ModernLogWorkflow.png "Diagram showing Log workflow")
+Reference https://www.terraform.io/docs/enterprise/admin/logging.html
 
 ### Integration with External Tools
 Review API calls 
