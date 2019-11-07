@@ -41,7 +41,8 @@ Workflow
 4. You can also automate the workspace creation by using the TFE workspace creator
 https://github.com/vincentramirez/creator (and financial institution reference)
 
-<TODO Diagram>
+[TODO Diagram]
+
 ---
 ### Controlling Permissions in Terraform
 1. On the TFE browser, go to "Settings" and create three groups: "admin", "users" and "superusers". 
@@ -126,7 +127,7 @@ local.key_value != "" ? cluster_secret = local.key_value : cluster_secret = ""
 1. Log in as user with "plan" permission. Run a manual plan
 2. Do a change in git to trigger a plan
 3. Log in with a different user
-4. Validate code can be reviewed before applying, and that sequencial executions are queued
+4. Validate code can be reviewed before applying, and that sequential executions are queued
 ---
 ### Terraform Workflow - Approval
 1. Log in as user with "apply" permission
@@ -144,7 +145,9 @@ Flexible code:
 Straightforward process described here https://www.terraform.io/docs/cloud/run/api.html, just make sure you compress (tar.gz) and upload to TFE the terraform code you want the workspace to execute
 Python is only used in the example to parse json, jq could be used instead.
 Csv is just used for this particular script to extract variables, not TFE requirement
-<TODO Diagram>
+
+[TODO Diagram]
+
 ---
 
 ### Terraform Cost Management
