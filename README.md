@@ -40,6 +40,8 @@ Workflow
 3. Reference on composition and abstracting objects within modules: https://www.terraform.io/docs/modules/composition.html
 4. You can also automate the workspace creation by using the TFE workspace creator
 https://github.com/vincentramirez/creator (and financial institution reference)
+
+<TODO Diagram>
 ---
 ### Controlling Permissions in Terraform
 1. On the TFE browser, go to "Settings" and create three groups: "admin", "users" and "superusers". 
@@ -142,6 +144,7 @@ Flexible code:
 Straightforward process described here https://www.terraform.io/docs/cloud/run/api.html, just make sure you compress (tar.gz) and upload to TFE the terraform code you want the workspace to execute
 Python is only used in the example to parse json, jq could be used instead.
 Csv is just used for this particular script to extract variables, not TFE requirement
+<TODO Diagram>
 ---
 
 ### Terraform Cost Management
