@@ -100,7 +100,43 @@ Use the "data" terraform object to reference existing AzureKeyVaults or Hashicor
 Test: [aks.tf](aks/aks.tf)
 
 #### Case 2: Store AKS key and retrieve if cluster destroyed/recreated
-The ultimate workflow will depend on what is available through Azure - if it is possible to inform an existing key when creating a new cluster, then you can do it using Terraform - check the ssh parameter of the resource above to validate.
+In general, AKS clusters shouldn't be destroyed when new node added. To simply add a new node, just change "count" in an agent_pool_profile block. To add a new type of node, add a new agent_pool_profile block. Example:
+
+```
+resource "azurerm_kubernetes_cluster" "test" {
+  name                = "acctestaks1"
+  location            = azurerm_resource_group.test.location
+  resource_group_name = azurerm_resource_group.test.name
+  dns_prefix          = "acctestagent1"
+
+  agent_pool_profile {
+    name            = "default"
+    count           = 1
+    vm_size         = "Standard_D1_v2"
+    os_type         = "Linux"
+    os_disk_size_gb = 30
+  }
+
+  agent_pool_profile {
+    name            = "pool2"
+    count           = 1
+    vm_size         = "Standard_D2_v2"
+    os_type         = "Linux"
+    os_disk_size_gb = 30
+  }
+
+  service_principal {
+    client_id     = "00000000-0000-0000-0000-000000000000"
+    client_secret = "00000000000000000000000000000000"
+  }
+
+  tags = {
+    Environment = "Production"
+  }
+}
+```
+
+Regarding ssh keys in particular, the ultimate workflow will depend on what is available through Azure - if it is possible to inform an existing key when creating a new cluster, then you can do it using Terraform - check the ssh parameter of the resource above to validate.
 
 If that is the case you use the same flow as Case 1, referencing "data". With Terraform 0.12 you can write a conditional block to create the AzureKeyVault secret or Hashicorp secret if one with the desired id (cluster name?) is not found. For example:
 
