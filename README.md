@@ -29,10 +29,16 @@ https://www.terraform.io/docs/cloud/vcs/index.html
 1. Find public module, or create one
 ```
 Example: https://github.com/terraform-aws-modules/terraform-aws-vpc.git
+# If desired, you can execute the following to remove external git references
+rm -rf .git
 ```
-2. Store in your git repo
+2. Remove old git references and create a new git repo with this module
 3. Point TFE to this module
 4. Make sure there is version tag to track lifecycle
+```
+git tag v1.0.0
+git push --tag
+```
 
 ---
 ### Terraform Code Review +
