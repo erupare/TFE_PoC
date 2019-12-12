@@ -9,7 +9,7 @@ output "exemplo" {
 }
 
 output "respuesta" {
-  value = "testtesttest"
+  value = "testnueva stringst"
 }
 
 # output "keepers" {
