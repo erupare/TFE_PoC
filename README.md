@@ -54,6 +54,30 @@ https://github.com/stenio123/TFE_PoC2/tree/master/sentinel/terraform
 #### Workspaces
 Siga el ejemplo
 ---
+## Configuration Designer
+1. Create a simple module, without many required variables
+```
+For this example we will use 
+https://github.com/stenio123/terraform-demo-module2
+```
+2. Add module to TFE
+3. Now pretend you are a developer. Go through Configuration designer, chosing this module. Copy the resulting output
+4. Paste this in your code
+```
+For this example we can paste in workflow/squad1/main.tf
+```
+5. Make a reference to this module in your code
+```
+In this example we can reference an output of the module
+```
+6. Show the result
+7. Now Change the module, and upload a new tag
+8. Update the version requirement in Squad1
+9. Show that the result changed
+
+This demonstrates how shared best practices can be implemented at the module level, using versioning
+
+---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
 

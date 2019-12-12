@@ -6,7 +6,7 @@ data "terraform_remote_state" "ip" {
 }
 module "module2" {
   source  = "app.terraform.io/TFE_PoV/module2/demo"
-  version = "1.0.0"
+  version = "1.0.1"
 
   test_var = "test"
 }
