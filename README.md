@@ -22,6 +22,18 @@ https://www.terraform.io/docs/cloud/vcs/index.html
 #### Validation
 1. Run execution manually by pressing the button
 2. Push a change to the branch of the git repo being tracked (master is default) and see the execution is triggered
+
+---
+### Basic Workflow
+#### Modules
+1. Find public module, or create one
+```
+Example: https://github.com/terraform-aws-modules/terraform-aws-vpc.git
+```
+2. Store in your git repo
+3. Point TFE to this module
+4. Make sure there is version tag to track lifecycle
+
 ---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
@@ -41,7 +53,6 @@ Workflow
 4. You can also automate the workspace creation by using the TFE workspace creator
 https://github.com/vincentramirez/creator (and financial institution reference)
 
-[TODO Diagram]
 
 ---
 ### Controlling Permissions in Terraform
@@ -181,8 +192,6 @@ Flexible code:
 Straightforward process described here https://www.terraform.io/docs/cloud/run/api.html, just make sure you compress (tar.gz) and upload to TFE the terraform code you want the workspace to execute
 Python is only used in the example to parse json, jq could be used instead.
 Csv is just used for this particular script to extract variables, not TFE requirement
-
-[TODO Diagram]
 
 ---
 
