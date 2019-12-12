@@ -29,6 +29,7 @@ https://www.terraform.io/docs/cloud/vcs/index.html
 1. Find public module, or create one
 ```
 Example: https://github.com/terraform-aws-modules/terraform-aws-vpc.git
+https://github.com/stenio123/terraform-demo-module-vpc
 # If desired, you can execute the following to remove external git references
 rm -rf .git
 ```
@@ -39,7 +40,19 @@ rm -rf .git
 git tag v1.0.0
 git push --tag
 ```
+#### Sentinel
+1. Create a repository or folder to track sentinel policies
+```
+Example: https://github.com/hashicorp/terraform-guides/tree/master/governance/second-generation
+https://github.com/stenio123/TFE_PoC2/tree/master/sentinel/terraform
+```
+2. Talk about the code - rules and sentinel.hcl
+3. Create policy set in TFE
+4. Execute to "all workspaces"
+5. Show the results when failed execution
 
+#### Workspaces
+Siga el ejemplo
 ---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
