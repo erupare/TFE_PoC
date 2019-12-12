@@ -52,7 +52,24 @@ https://github.com/stenio123/TFE_PoC2/tree/master/sentinel/terraform
 5. Show the results when failed execution
 
 #### Workspaces
-Siga el ejemplo
+1. Use code in workflow/squad1
+2. Create new workspace in Terraform
+3. Add modules, change variables, update code
+4. Show how different users have different permissions
+5. Show approval process, cost estimation
+
+---
+### Controlling Permissions in Terraform
+1. On the TFE browser, go to "Settings" and create three groups: "admin", "users" and "superusers". 
+2. Create three users, and assign each one to each of these groups
+3. Go to the workspace created in the previous example, go to "Settings"> "Permissions" and assign the following permissions: "admin" has admin rights, "users" can plan and "superusers" can apply
+4. Log out of the admin user and log in with each one of the 3 users created, validating that their permissions are constrained by which group they are in
+
+#### SAML Integration
+
+These docs describe the steps to configure integration with Active Directory, Okta and OneLogin:
+https://www.terraform.io/docs/enterprise/saml/identity-provider-configuration-adfs.html
+
 ---
 ## Configuration Designer
 1. Create a simple module, without many required variables
@@ -78,6 +95,14 @@ In this example we can reference an output of the module
 This demonstrates how shared best practices can be implemented at the module level, using versioning
 
 ---
+### Terraform Workflow - Githook Merge
+1. Open a TFE workspace, validate it is tracking the "master" branch
+2. Create a branch "test" on git repo, do a change and push it to the repo
+3. Validate no runs triggered on TFE
+4. Merge "test" to "master"
+5. Validate TFE strated a run
+
+---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
 
@@ -96,18 +121,6 @@ Workflow
 4. You can also automate the workspace creation by using the TFE workspace creator
 https://github.com/vincentramirez/creator (and financial institution reference)
 
-
----
-### Controlling Permissions in Terraform
-1. On the TFE browser, go to "Settings" and create three groups: "admin", "users" and "superusers". 
-2. Create three users, and assign each one to each of these groups
-3. Go to the workspace created in the previous example, go to "Settings"> "Permissions" and assign the following permissions: "admin" has admin rights, "users" can plan and "superusers" can apply
-4. Log out of the admin user and log in with each one of the 3 users created, validating that their permissions are constrained by which group they are in
-
-#### SAML Integration
-
-These docs describe the steps to configure integration with Active Directory, Okta and OneLogin:
-https://www.terraform.io/docs/enterprise/saml/identity-provider-configuration-adfs.html
 
 ---
 ### Terraform Workflow - Variables
@@ -205,13 +218,7 @@ locals {
 local.key_value != "" ? cluster_secret = local.key_value : cluster_secret = ""
 ```
 
----
-### Terraform Workflow - Githook Merge
-1. Open a TFE workspace, validate it is tracking the "master" branch
-2. Create a branch "test" on git repo, do a change and push it to the repo
-3. Validate no runs triggered on TFE
-4. Merge "test" to "master"
-5. Validate TFE strated a run
+
 ---
 ### Terraform Workflow - Plan
 1. Log in as user with "plan" permission. Run a manual plan
