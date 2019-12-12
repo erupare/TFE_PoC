@@ -5,7 +5,7 @@ output "output_from_random" {
 }
 
 output "exemplo" {
-  value = "test"
+  value = module2.exemplo
 }
 
 # output "keepers" {
