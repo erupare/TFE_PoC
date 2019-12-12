@@ -7,7 +7,7 @@ data "terraform_remote_state" "ip" {
 
 resource "random_id" "random" {
   keepers = {
-    uuid = "${uuid()}"
+    uuid = "${data.terraform_remote_state.ip.gcp_external_ip}"
   }
   byte_length = 8
 }
