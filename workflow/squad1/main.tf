@@ -15,8 +15,3 @@ resource "random_id" "random" {
   byte_length = 8
 }
 
-
-
-curl \
-    --header "X-Vault-Token: $VAULT_TOKEN" \
-    $VAULT_ADDR/v1/secret/mi_secret
