@@ -12,6 +12,6 @@ module "module2" {
 }
 
 resource "random_id" "random" {
-  byte_length = 24
+  byte_length = 4
 }
 
