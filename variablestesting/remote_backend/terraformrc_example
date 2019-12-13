@@ -1,0 +1,3 @@
+credentials "TFE_URL" {
+  token = "YOUR_TFE_TEAM_TOKEN"
+}

@@ -133,13 +133,23 @@ https://github.com/vincentramirez/creator (and financial institution reference)
 1. Do one example using Terraform Enterprise provider
 https://www.terraform.io/docs/providers/tfe/index.html
 Will need a user token, workspace id, tfe url, tfe certificate
-Test: [tfprovider.md](variablestesting/tfprovider.md)
+Test: [tfprovider.md](variablestesting/tfprovider.tf)
 
 #### Terraform Enterprise API
 1. Do one example using Terraform Enterprise API
 https://www.terraform.io/docs/cloud/api/variables.html
 it will need a user token, workspace id, tfe url, tfe certificate
 Test: [api.md](variablestesting/api.md)
+
+#### Terraform CLI
+This workflows is for new deployments (not for existing workspaces), where you want to store the state file in Terraform
+Reference for Jenkins workflow: https://medium.com/hashicorp-engineering/introduction-a9c8530ce482
+Test: [remote state](variabletesting/remote_backend)
+Make sure you set the credentials in .terraformrc and execute
+```
+export TF_CLI_CONFIG_FILE=.terraformrc
+```
+
 ---
 ### Integration with Azure KeyVault and Vault +
 1. Ensure Terraform code using the two resources:
