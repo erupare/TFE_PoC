@@ -161,6 +161,21 @@ export TF_CLI_CONFIG_FILE=.terraformrc
 ```
 
 ---
+### Azure Roadmap updates:
+- Azure Cost Estimation: https://www.terraform.io/docs/cloud/cost-estimation/azure.html
+- Azure Devops Integration: https://www.hashicorp.com/blog/announcing-azure-devops-support-for-terraform-cloud-and-enterprise/
+- Azure Provider: https://www.terraform.io/docs/providers/azurerm/index.html
+- Reference Modules by Azure: https://registry.terraform.io/search?q=azure&verified=true
+
+---
+### TFE Notifications
+1. Open workspace
+2. Go to "Settings"> "Notifications"
+3. Talk about the two different types of integration
+![alt text](tfenotifications/servicenowTFE.png "Diagram showing TFE notification")
+https://medium.com/hashicorp-engineering/terraform-enterprise-and-friends-2620bdfd1951
+
+---
 ### Integration with Azure KeyVault and Vault +
 1. Ensure Terraform code using the two resources:
 #### Azure KeyVault
@@ -320,13 +335,7 @@ Use these as reference for tests https://github.com/stenio123/terraform-guides/t
 6. Validate Sentinel rules updated
 7. Validate existing workspaces not impacted, need a new run for new rules to be applied. This shows they have two different lifecyles, allowing two distinct teams to manage
 8. Discuss how Sentinel policies can be enforced on a recurring basis by running a cron job that triggers plans hourly using API calls and having notications set up
----
-### TFE Notifications
-1. Open workspace
-2. Go to "Settings"> "Notifications"
-3. Talk about the two different types of integration
-![alt text](tfenotifications/servicenowTFE.png "Diagram showing TFE notification")
-https://medium.com/hashicorp-engineering/terraform-enterprise-and-friends-2620bdfd1951
+
 ---
 ### Terraform Workflow - Code lifecycle +
 #### Workspace
