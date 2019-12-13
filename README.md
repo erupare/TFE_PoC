@@ -124,26 +124,36 @@ https://github.com/vincentramirez/creator (and financial institution reference)
 
 ---
 ### Terraform Workflow - Variables
-#### Manually
+Terraform Enterprise allows multiple ways of interacting with workspaces and TFE orgs.
+Reference links here: https://www.terraform.io/docs/cloud/run/api.html
+
+#### VCS Connection
+Connect a TFE workspace to a git repository, as done previously
+To change variables of a workspace:
 1. Open the workspace created above
 2. Change variables
 3. Run a plan to validate changes
 
-#### Terraform Enterprise Provider
-1. Do one example using Terraform Enterprise provider
-https://www.terraform.io/docs/providers/tfe/index.html
-Will need a user token, workspace id, tfe url, tfe certificate
-Test: [tfprovider.md](variablestesting/tfprovider.tf)
-
 #### Terraform Enterprise API
+Execute API calls as documented in https://www.terraform.io/docs/cloud/api
+To change variables of a workspace:
 1. Do one example using Terraform Enterprise API
 https://www.terraform.io/docs/cloud/api/variables.html
 it will need a user token, workspace id, tfe url, tfe certificate
 Test: [api.md](variablestesting/api.md)
 
 #### Terraform CLI
-This workflows is for new deployments (not for existing workspaces), where you want to store the state file in Terraform
+Allows following a tradional Terraform open source workflow, using the client locally, while still benefiting from centralize state storage, organization and Sentinel checks
+##### Terraform Enterprise Provider
+To change variables of a workspace:
+1. Do one example using Terraform Enterprise provider
+https://www.terraform.io/docs/providers/tfe/index.html
+Will need a user token, workspace id, tfe url, tfe certificate
+Test: [tfprovider.md](variablestesting/tfprovider.tf)
+
+##### Terraform Enterprise Remote State
 Reference for Jenkins workflow: https://medium.com/hashicorp-engineering/introduction-a9c8530ce482
+To change variables of a workspace:
 Test: [remote state](variabletesting/remote_backend)
 Make sure you set the credentials in .terraformrc and execute
 ```
