@@ -102,6 +102,21 @@ This demonstrates how shared best practices can be implemented at the module lev
 4. Merge "test" to "master"
 5. Validate TFE strated a run
 
+--- 
+### Validate State Encrypted
+1. Deploy PTFE, set it in production mode pointing to a S3 bucket
+2. Run a workspace
+3. Open the S3 bucket with AWS console, show files encrypted
+
+---
+### Audit Logs
+1. Log in to TFE server
+2. Run [audit.sh](logs/audit.sh)
+3. Validate information
+4. Discuss how to ship this log to a log management platform like Splunk, Datadog or logstash
+![alt text](logs/ModernLogWorkflow.png "Diagram showing Log workflow")
+Reference https://www.terraform.io/docs/enterprise/admin/logging.html
+
 ---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
@@ -345,14 +360,7 @@ Use these as reference for tests https://github.com/stenio123/terraform-guides/t
 2. Push a new gittag to the repsository tracked by module, ensure new version shows up
 #### Sentinel
 1. Do a change and push code to respository associated with Sentinel policy, validate changes
----
-### Audit Logs
-1. Log in to TFE server
-2. Run [audit.sh](logs/audit.sh)
-3. Validate information
-4. Discuss how to ship this log to a log management platform like Splunk, Datadog or logstash
-![alt text](logs/ModernLogWorkflow.png "Diagram showing Log workflow")
-Reference https://www.terraform.io/docs/enterprise/admin/logging.html
+
 ---
 ### Integration with External Tools 
 Review API calls 
