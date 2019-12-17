@@ -1,5 +1,14 @@
 data "azurerm_client_config" "current" {}
 
+
+# Example retrieving existing secret
+data "azurerm_key_vault_secret" "example" {
+  name         = var.existing_secret_name
+  key_vault_id = var.existing_key_vault_id
+}
+
+
+# Example creating new keyvault and new secret
 resource "azurerm_resource_group" "test" {
   name     = "stenio-poc"
   location = "West US"
