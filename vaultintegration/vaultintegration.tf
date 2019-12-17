@@ -24,7 +24,7 @@ data "vault_generic_secret" "my_static_secret2" {
 }
 
 data "vault_generic_secret" "my_dynamic_secret" {
-  path = "database/creds/" + var.dynamic_secret_role
+  path = "database/creds/${var.dynamic_secret_role}"
 }
 
 data "vault_generic_secret" "my_dynamic_secret2" {
