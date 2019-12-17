@@ -62,7 +62,7 @@ resource "aws_instance" "ubuntu" {
 
   key_name    = var.aws_key
   user_data = data.template_file.init.rendered
-  vpc_security_group_ids = ["${aws_security_group.ec2_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ec2_sg_vault_client.id}"]
   tags = {
     Owner = "Stenio Ferreira"
     TTL = "24"
