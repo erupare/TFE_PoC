@@ -32,7 +32,7 @@ vault auth enable userpass
 
 # Create ACL policy for this user
 echo '
-path "secret/foo" {
+path "secret/data/foo" {
   capabilities = ["read"]
 }
 
@@ -41,8 +41,10 @@ path "database/creds/read_only" {
 }'| vault policy write terraform_user -
 
 # Create user
-vault write auth/userpass/users/terraform_user password="Secret!" -policy=terraform_user
+vault write auth/userpass/users/terraform_user password="Secret!" policies=terraform_user
 
+# Create static secret
+vault kv put secret/foo value=MySecret
 ###
 # Dynamic Secrets config
 #
@@ -62,6 +64,10 @@ vault write database/config/mysql \
     plugin_name=mysql-legacy-database-plugin \
     connection_url="$VAULT_DB_USER:$VAULT_DB_USER_PASS@tcp($DB_CONNECTION_STRING)/" \
     allowed_roles=*
+vault write database/config/mysql \
+    plugin_name=mysql-legacy-database-plugin \
+    connection_url="vault:FpC2JbAr8ZaecVxx@tcp(terraform-20191217124148135000000001.cd2ntnfz8tii.us-east-1.rds.amazonaws.com:3306)/" \
+    allowed_roles=*
 
 # Create role
 vault write database/roles/read_only \
@@ -71,7 +77,7 @@ vault write database/roles/read_only \
     max_ttl="24h"
 
 # Validation
-# vault read database/creds/readonly
+# vault read database/creds/read_only
 ```
 
 ### Terraform
