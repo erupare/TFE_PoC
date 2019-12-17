@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "test" {
-  name     = "my-resource-group"
+  name     = "stenio-poc"
   location = "West US"
 }
 
@@ -28,12 +28,14 @@ resource "azurerm_key_vault" "test" {
     key_permissions = [
       "create",
       "get",
+      "list",
     ]
 
     secret_permissions = [
       "set",
       "get",
       "delete",
+      "list",
     ]
   }
 
