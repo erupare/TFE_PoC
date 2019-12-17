@@ -63,7 +63,7 @@ resource "azurerm_key_vault_secret" "test" {
   key_vault_id = azurerm_key_vault.test.id
 
   tags = {
-    environment = "Production"
+    environment = "Production2"
   }
 }
 
