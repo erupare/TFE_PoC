@@ -118,6 +118,10 @@ This demonstrates how shared best practices can be implemented at the module lev
 Reference https://www.terraform.io/docs/enterprise/admin/logging.html
 
 ---
+### Vault Integration
+1. Check [README.md](vaultintegration/README.md) in the [vaultintegration](vaultintegration) folder
+
+---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
 
