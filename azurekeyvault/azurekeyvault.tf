@@ -59,7 +59,7 @@ resource "azurerm_key_vault" "test" {
 
 resource "azurerm_key_vault_secret" "test" {
   name         = "secret-sauce"
-  value        = "szechuan"
+  value        = "nuevosecreto"
   key_vault_id = azurerm_key_vault.test.id
 
   tags = {
