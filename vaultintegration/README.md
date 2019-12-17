@@ -32,6 +32,11 @@ vault auth enable userpass
 
 # Create ACL policy for this user
 echo '
+# Terraform will create a temporary Vault token for the connection, so the user needs this permission.
+# This is a safety mechanism, allows a Vault admin to revoke this token if desired and lowers exposure
+path "auth/token/create" {
+    capabilities = ["create", "update"]
+}
 path "secret/data/foo" {
   capabilities = ["read"]
 }
