@@ -30,7 +30,7 @@
 
 
 resource "azurerm_resource_group" "test" {
-  name     = "acctestRG1"
+  name     = "stenio-poc-rg2"
   location = "East US"
 }
 
