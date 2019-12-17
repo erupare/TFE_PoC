@@ -59,8 +59,6 @@ resource "azurerm_kubernetes_cluster" "test" {
   service_principal {
     client_id     = var.client_id
     client_secret = var.client_secret
-    # client_secret = "${data.azurerm_key_vault_secret.test.value}"
-    # client_secret = "${data.vault_generic_secret.client_secret.data["secret_value"]}"
 
   }
 

@@ -122,6 +122,27 @@ Reference https://www.terraform.io/docs/enterprise/admin/logging.html
 1. Check [README.md](vaultintegration/README.md) in the [vaultintegration](vaultintegration) folder
 
 ---
+### Azure Key Vault Integration
+1. Ensure your Azure API keys have permission to read/create Azure Key Vault secrets
+2. Update variables on [azurekeyvault](/azurekeyvault) and create keyvaults/secrets as needed
+3. Run the code on azurekeyvault. This shows how to read an existing secret and how to create a new one using terraform
+
+---
+### AKS Integration
+1. AKS is a resource like any other, in this case a resource of the Azure provider
+2. There is example code in the [aks](/aks) directory
+3. Additionally, here a few blogs/tutorials on using this resource with Terraform:
+
+- https://www.hashicorp.com/blog/kubernetes-cluster-with-aks-and-terraform/
+- https://learnk8s.io/blog/get-start-terraform-aks
+- https://blog.kubernauts.io/aks-deployment-automation-with-terraform-and-multi-aks-cluster-management-with-rancher-6da9865ad52b
+- https://medium.com/@kari.marttila/creating-azure-kubernetes-service-aks-the-right-way-9b18c665a6fa
+
+4. If you are only interested in a simple orchestrator, you might want to consider Nomad, which also has a Terraform provider. Here is a blog post on how Trivago, the travel online site decided to switch from Kubernetes to Nomad, and their workflow
+https://tech.trivago.com/2019/01/25/nomad-our-experiences-and-best-practices/
+
+
+---
 ### Terraform Code Review +
 1. Terraform Enterprise allows segregation of roles, with team members responsible for creating and managing modules, creating and managing Sentinel policies and creating and managing Terraform code.
 
