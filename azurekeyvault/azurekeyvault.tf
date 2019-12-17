@@ -1,10 +1,14 @@
 data "azurerm_client_config" "current" {}
 
+data "azurerm_key_vault" "example" {
+  name                = var.existing_key_vault_name
+  resource_group_name = var.rg_name
+}
 
 # Example retrieving existing secret
 data "azurerm_key_vault_secret" "example" {
   name         = var.existing_secret_name
-  key_vault_id = var.existing_key_vault_id
+  key_vault_id = data.azurerm_key_vault.example.id
 }
 
 
