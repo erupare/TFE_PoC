@@ -35,8 +35,8 @@ data "vault_generic_secret" "my_dynamic_secret2" {
 data "template_file" "init" {
   template = "${file("vault_bootstrap_demo.sh.tpl")}"
   vars = {
-    static_secret1 = data.vault_generic_secret.my_static_secret.data
-    static_secret2 = data.vault_generic_secret.my_static_secret2.data
+    static_secret1 = data.vault_generic_secret.my_static_secret.data_json
+    static_secret2 = data.vault_generic_secret.my_static_secret2.data_json
     dynamic_secret1 = data.vault_generic_secret.my_dynamic_secret.data["username"]
     dynamic_secret2 = data.vault_generic_secret.my_dynamic_secret2.data["password"]
   }
