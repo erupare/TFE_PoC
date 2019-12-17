@@ -1,6 +1,6 @@
 data "azurerm_client_config" "current" {}
 
-data "azurerm_key_vault" "example" {
+/** data "azurerm_key_vault" "example" {
   name                = var.existing_key_vault_name
   resource_group_name = var.rg_name
 }
@@ -9,7 +9,7 @@ data "azurerm_key_vault" "example" {
 data "azurerm_key_vault_secret" "example" {
   name         = var.existing_secret_name
   key_vault_id = data.azurerm_key_vault.example.id
-}
+} */
 
 
 # Example creating new keyvault and new secret
@@ -65,4 +65,10 @@ resource "azurerm_key_vault_secret" "test" {
   tags = {
     environment = "Production"
   }
+}
+
+# Example retrieving existing secret
+data "azurerm_key_vault_secret" "example" {
+  name         = azurerm_key_vault_secret.test.name
+  key_vault_id = azurerm_key_vault.test.id
 }
