@@ -7,11 +7,3 @@ output "output_from_random" {
 output "exemplo" {
   value = module.module2.exemplo
 }
-
-output "respuesta" {
-  value = "testnueva stringst"
-}
-
-# output "keepers" {
-#  value = random_id.random.keepers
-# }
